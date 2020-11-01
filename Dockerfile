@@ -36,6 +36,8 @@ WORKDIR /src
 # Requirements
 RUN conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
 RUN conda install -c anaconda numpy
+RUN git config --global --add user.name gogobd \
+ && git config --global --add user.email g@sicherlich.org
 
 # Start container with notebook and vsc
 CMD /code-server-3.2.0-linux-x86_64/code-server --auth none --bind-addr 0.0.0.0:8080 /src/ & \
