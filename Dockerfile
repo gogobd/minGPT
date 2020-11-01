@@ -34,7 +34,7 @@ COPY . /src
 WORKDIR /src
 
 # Start container with notebook and vsc
-CMD /code-server-3.2.0-linux-x86_64/code-server --bind-addr 0.0.0.0:8080 /src/ & \
+CMD /code-server-3.6.1-linux-amd64/bin/code-server --bind-addr 0.0.0.0:8080 /src/ & \
     jupyter lab --no-browser --ip 0.0.0.0 --port 8000 --allow-root
 
 # docker build -t pytorch_vsc .
