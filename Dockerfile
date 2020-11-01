@@ -34,7 +34,8 @@ COPY . /src
 WORKDIR /src
 
 # Requirements
-RUN while read requirement; do conda install --yes $requirement; done < requirements.txt
+RUN conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
+RUN conda install -c anaconda numpy
 
 # Start container with notebook and vsc
 CMD /code-server-3.2.0-linux-x86_64/code-server --auth none --bind-addr 0.0.0.0:8080 /src/ & \
