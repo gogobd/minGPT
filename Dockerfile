@@ -1,4 +1,4 @@
-FROM nvidia/cuda:latest
+FROM pytorch/conda-cuda-cxx11-ubuntu1604
 
 # Install system dependencies
 RUN apt-get update \
@@ -31,7 +31,8 @@ COPY . /src
 WORKDIR /src
 
 # Requirements
-RUN conda install -c conda-forge -c anaconda -c pytorch jupyterlab nodejs numpy pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2
+RUN conda update -n base -c defaults conda \
+ && conda install -c conda-forge -c anaconda -c pytorch jupyterlab nodejs numpy pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2
 RUN git config --global --add user.name gogobd \
  && git config --global --add user.email g@sicherlich.org
 
@@ -39,5 +40,5 @@ RUN git config --global --add user.name gogobd \
 CMD /code-server-3.2.0-linux-x86_64/code-server --auth none --bind-addr 0.0.0.0:8080 /src/ & \
     jupyter lab --no-browser --ip 0.0.0.0 --port 8000 --allow-root
 
-# docker build -t pytorch_vsc .
-# docker run -v /host/directory/data:/data -p 8000:8000 -p 8080:8080 --ipc=host --gpus all -e SHELL=/bin/bash -it pytorch_vsc
+# docker build -t minglt .
+# docker run -v /host/directory/data:/data -p 8000:8000 -p 8080:8080 --ipc=host --gpus all -e SHELL=/bin/bash -it mingpt
